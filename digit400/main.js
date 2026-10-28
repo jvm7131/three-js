@@ -75,7 +75,7 @@ const controls = new OrbitControls(camera, renderer.domElement);
 
 // Background
 
-const spaceTexture = new THREE.TextureLoader().load("images/night_sky.jpg");
+const spaceTexture = new THREE.TextureLoader().load("images/purple-galaxy.jpg");
 
 scene.background = spaceTexture;
 
@@ -126,3 +126,32 @@ const torusKnot = new THREE.Mesh(torusGeo, torusMaterial);
 
 scene.add(torusKnot);
 torusKnot.position.y = 20;
+
+// Heart
+
+const heartShape = new THREE.Shape();
+
+heartShape.moveTo(0, 0);
+heartShape.bezierCurveTo(-2, 2, -4, 4, -4, 6);
+heartShape.bezierCurveTo(-4, 9, 0, 9, 0, 6);
+heartShape.bezierCurveTo(0, 9, 4, 9, 4, 6);
+heartShape.bezierCurveTo(4, 4, 2, 2, 0, 0);
+
+const heartGeometry = new THREE.ExtrudeGeometry(heartShape, {
+  depth: 2,
+  bevelEnabled: true,
+  bevelThickness: 0.5,
+  bevelSize: 0.5,
+  bevelSegments: 3,
+});
+
+const heartMaterial = new THREE.MeshPhongMaterial({ color: 0xff69b4 });
+
+const heartMesh = new THREE.Mesh(heartGeometry, heartMaterial);
+
+scene.add(heartMesh);
+
+heartMesh.position.z = -15;
+heartMesh.position.x = -3;
+
+heartMesh.rotation.y += 0.02;
